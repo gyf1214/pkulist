@@ -11,7 +11,7 @@ end
 
 list = JSON.dump rules
 
-puts %{var proxy = "SOCKS5 127.0.0.1:1080; SOCKS 127.0.0.1:1080; DIRECT;";
+puts %{var proxy = "PROXY 127.0.0.1:1080; DIRECT;";
 var direct = "DIRECT;"
 var rules = #{list};
 
