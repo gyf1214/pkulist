@@ -11,17 +11,16 @@ end
 
 list = JSON.dump rules
 
-puts %{
-    var proxy = "SOCKS5 127.0.0.1:1080; SOCKS 127.0.0.1:1080; DIRECT;";
-    var direct = "DIRECT;"
-    var rules = #{list};
+puts %{var proxy = "SOCKS5 127.0.0.1:1080; SOCKS 127.0.0.1:1080; DIRECT;";
+var direct = "DIRECT;"
+var rules = #{list};
 
-    var FindProxyForURL = function (url, host) {
-        for (var i = 0; i < rules.length; i++) {
-            if isInNet(host, rules[0], rules[1]) {
-                return direct;
-            }
+function FindProxyForURL(url, host) {
+    for (var i = 0; i < rules.length; i++) {
+        if (isInNet(host, rules[i][0], rules[i][1])) {
+            return direct;
         }
-        return proxy;
     }
+    return proxy;
+}
 }
